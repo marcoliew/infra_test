@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       upload:
-        description: "AWS Account ID"
+        description: "Upload results to GitHub (true/false)"
         type: boolean
         required: true
         default: true
@@ -15,7 +15,8 @@ jobs:
   security-scan:
     if: |
       github.event_name == 'pull_request' ||
-      (github.event_name == 'push' && !github.event.pull_request)
+      (github.event_name == 'push' && !github.event.pull_request) ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
