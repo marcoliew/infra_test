@@ -32,7 +32,7 @@ jobs:
           #soft_fail: true
           format: 'sarif'
           additional_args: '-O tfsec-results.sarif --concise-output'
-        continue-on-error: true
+        #continue-on-error: true
 
       - name: Upload tfsec results to GitHub
         if: |
