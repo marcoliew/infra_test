@@ -29,8 +29,8 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: './infra'
-          soft_fail: false
-          # additional_args: '--format sarif --out tfsec-results.sarif'
+          #soft_fail: false
+          additional_args: '--format sarif --out tfsec-results.sarif --no-soft-fail'
 
       - name: Upload tfsec results to GitHub
         if: |
