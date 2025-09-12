@@ -38,7 +38,7 @@ jobs:
           working_directory: './infra'
           format: 'sarif'
           additional_args: '-O tfsec-results.sarif --concise-output'
-        #continue-on-error: true
+        continue-on-error: ${{ github.event_name == 'pull_request' }}
 
       - name: Upload tfsec results to GitHub
         # if: |
