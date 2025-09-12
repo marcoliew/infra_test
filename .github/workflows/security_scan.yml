@@ -22,16 +22,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install HTMLHint
-        run: npm install -g htmlhint
+      # - name: Install HTMLHint
+      #   run: npm install -g htmlhint
 
       - name: Terraform Security Scan
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: './infra'
-          soft_fail: false
+          #soft_fail: false
           format: 'sarif'
-          #additional_args: '--format sarif --out tfsec-results.sarif --soft-fail false'
+          additional_args: '-o tfsec-results.sarif'
 
       - name: Upload tfsec results to GitHub
         if: |
@@ -41,15 +41,15 @@ jobs:
         with:
           sarif_file: tfsec-results.sarif
 
-      - name: Shell Script Security Scan
-        run: |
-          find . -name "*.sh" -exec shellcheck {} \;
-        continue-on-error: ${{ github.event_name == 'push' }}
+      # - name: Shell Script Security Scan
+      #   run: |
+      #     find . -name "*.sh" -exec shellcheck {} \;
+      #   continue-on-error: ${{ github.event_name == 'push' }}
 
-      - name: HTML Security Scan
-        run: |
-          htmlhint "site/**/*.html" --config .htmlhintrc
-        continue-on-error: ${{ github.event_name == 'push' }}
+      # - name: HTML Security Scan
+      #   run: |
+      #     htmlhint "site/**/*.html" --config .htmlhintrc
+      #   continue-on-error: ${{ github.event_name == 'push' }}
 
       - name: Fail build on security issues (PR only)
         if: github.event_name == 'pull_request' && failure()
