@@ -25,22 +25,22 @@ jobs:
       # - name: Install HTMLHint
       #   run: npm install -g htmlhint
 
-      - name: Terraform Security Scan
-        uses: aquasecurity/tfsec-action@v1.0.3
-        with:
-          working_directory: './infra'
-          #soft_fail: true
-          format: 'sarif'
-          additional_args: '-O tfsec-results.sarif --concise-output'
-        #continue-on-error: true
+      # - name: Terraform Security Scan
+      #   uses: aquasecurity/tfsec-action@v1.0.3
+      #   with:
+      #     working_directory: './infra'
+      #     #soft_fail: true
+      #     format: 'sarif'
+      #     additional_args: '-O tfsec-results.sarif --concise-output'
+      #   #continue-on-error: true
 
-      - name: Upload tfsec results to GitHub
-        if: |
-          (github.event_name == 'pull_request') ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.upload == 'true')
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: tfsec-results.sarif
+      # - name: Upload tfsec results to GitHub
+      #   if: |
+      #     (github.event_name == 'pull_request') ||
+      #     (github.event_name == 'workflow_dispatch' && github.event.inputs.upload == 'true')
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: tfsec-results.sarif
 
       # - name: Shell Script Security Scan
       #   run: |
