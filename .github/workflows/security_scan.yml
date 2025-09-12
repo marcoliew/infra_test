@@ -31,7 +31,7 @@ jobs:
           working_directory: './infra'
           #soft_fail: false
           format: 'sarif'
-          additional_args: '-o tfsec-results.sarif'
+          additional_args: '-O tfsec-results.sarif'
 
       - name: Upload tfsec results to GitHub
         if: |
