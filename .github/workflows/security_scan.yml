@@ -13,10 +13,10 @@ on:
         default: true
 jobs:
   security-scan:
-    if: |
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'push' && !github.event.pull_request) ||
-      github.event_name == 'workflow_dispatch'
+    # if: |
+    #   github.event_name == 'pull_request' ||
+    #   (github.event_name == 'push' && !github.event.pull_request) ||
+    #   github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,9 +35,9 @@ jobs:
         #continue-on-error: true
 
       - name: Upload tfsec results to GitHub
-        if: |
-          (github.event_name == 'pull_request') ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.upload == 'true')
+        # if: |
+        #   (github.event_name == 'pull_request') ||
+        #   (github.event_name == 'workflow_dispatch' && github.event.inputs.upload == 'true')
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: tfsec-results.sarif
