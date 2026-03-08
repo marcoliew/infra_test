@@ -1,0 +1,53 @@
+-----------------------
+
+Context: I am a Senior Cloud & DevOps Engineer onboarding to this Azure-based project. I need to understand the repo's history to identify high-risk 
+
+areas and routine maintenance patterns.
+
+Task: Analyze the attached JSON of merged PRs and generate an Onboarding Intelligence Report.
+
+Categories for Analysis:
+
+Critical/High-Risk: Initial build, Hotfixes, security patches, or changes to core infra (Networking, RBAC, State files).
+
+BAU/Maintenance: Version bumps, documentation, and routine cleanup.
+
+Active Development: New Terraform modules or pipeline features.
+
+Output Requirements:
+
+The "Landmine" Map: A table of the most complex or critical PRs I should review to understand the system's pain points.
+
+Key Contributors: Who are the "Subject Matter Experts" I should talk to based on PR activity?
+
+The BAU Ratio: What percentage of time is spent on "Firefighting" vs. "Feature Work"?
+
+Infrastructure Evolution: Briefly summarize how the Terraform structure has changed recently.
+
+Goal: Help me get "up to speed" so I can contribute effectively without breaking existing logic.
+
+--------------
+
+Context: I am a Senior DevOps Engineer on a Windows machine. I need a robust PowerShell 7 script that uses the GitHub CLI (gh) to extract Pull Request data for repository onboarding and analysis.
+
+Script Requirements:
+
+1. Environment Check: Verify gh is installed and the user is authenticated (gh auth status). If not, exit with a helpful message.
+
+2. Parameters: The script must use a Param() block to accept $RepoName (e.g., org/repo) and $Limit (default to 100).
+
+3. Data Fetching: Use gh pr list with the --state merged flag.
+
+4. Fields to Export: Extract number, title, body, author, labels, createdAt, mergedAt, and comments in JSON format.
+
+5. Onboarding Context: Ensure no truncation of body or comments so I can perform a deep architectural analysis later.
+
+6. File Management: >    * Sanitize the $RepoName (replace / with _) to use in the filename.
+
+Save the output as repo_history_[sanitized_repo]_[timestamp].json.
+
+7. Feedback: Output the file path, the number of PRs exported, and the total file size to the console.
+
+Global Command Setup: > * Please provide instructions on how to save this as Get-GHHistory.ps1 and add it to my PowerShell Profile or a folder in my environment PATH so I can call it from any directory using Get-GHHistory -RepoName "owner/repo" -Limit 50.
+
+Goal: A professional-grade PowerShell tool for quick data extraction at the office.
